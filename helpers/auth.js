@@ -35,8 +35,8 @@ auth.csrf = require('csurf')()
 
 // Configure the Twitter strategy for use by Passport.
 passport.use(new TwitterStrategy({
-    consumerKey: auth.twitter_oauth.consumer_key,
-    consumerSecret: auth.twitter_oauth.consumer_secret,
+    consumerKey: process.env.CONSUMER_KEY,
+    consumerSecret: process.env.CONSUMER_SECRET,
     // we want force login, so we set the URL with the force_login=true
     userAuthorizationURL: 'https://api.twitter.com/oauth/authenticate?force_login=true'
   },
