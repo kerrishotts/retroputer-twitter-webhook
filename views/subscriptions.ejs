@@ -1,9 +1,8 @@
 <% include partials/header.ejs %>
-
 <div class="row">
   <div class="col-sm-12">
     <div class="card">
-      <h3 class="card-header"><i class="fas fa-address-book"></i> Manage Subscriptions</h3>
+      <h4 class="card-header"><i class="fas fa-address-book"></i> Manage Subscriptions</h4>
       <div class="card-body">
         <p><strong>Environment:</strong> <%= environment %><br/>
         <strong>Application ID:</strong> <%= application_id %></p>
@@ -23,7 +22,7 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="card">
-      <h3 class="card-header"><i class="fas fa-users"></i> All Subscriptions</h3>
+      <h4 class="card-header"><i class="fas fa-users"></i> All Subscriptions</h4>
       <% if(subscriptions.length) { %>
       <table class="table table-striped">
         <thead>
