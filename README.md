@@ -1,13 +1,7 @@
-# account-activity-dashboard
+# Twitter Bot Starter Project with Webhooks and Account Activity API
 
-Sample web app and helper scripts to get started with Twitter's premium Account Activity API (All Activities). Written in Node.js. Full documentation for this API can be found on developer.twitter.com [here](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview).
+This starter projects is based on [account-activity-dashboard](https://github.com/twitterdev/account-activity-dashboard) and uses Twitter's [Account Activity API]((https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview)(.
 
-## Dependencies
-
-* A Twitter app created on [apps.twitter.com](https://apps.twitter.com/), whitelisted for access to the Account Activity API
-* [Node.js](https://nodejs.org)
-* [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) or other webhost (optional)
-* [ngrok](https://ngrok.com/) or other tunneling service (optional)
 
 ## Create and configure a Twitter app
 
