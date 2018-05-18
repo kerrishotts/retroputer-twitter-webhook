@@ -1,6 +1,7 @@
-const request = require('request-promise')
-const auth = require('../helpers/auth')
-const socket = require('../helpers/socket')
+const request = require('request-promise');
+const auth = require('../helpers/auth');
+const socket = require('../helpers/socket');
+const bot = require('../bot');
 
 
 var activity = function (req, resp) {
@@ -9,6 +10,7 @@ var activity = function (req, resp) {
     activity_event: socket.activity_event
   }
   resp.render('activity', json_response)
+  bot.handle_event(socket.activity_event);
 }
 
 
