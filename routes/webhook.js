@@ -29,14 +29,14 @@ webhook.get_config = function (req, resp) {
       json_response.update_webhook_url = json_response.configs[0].url
     }
 
-    console.log(json_response)
+    // console.log(json_response)
     resp.render('webhook', json_response)
   })
 
   // failure
   .catch(function (body) {
     if (body) {
-      console.log(body)
+      // console.log(body)
     }
     var json_response = {
       title: 'Error',
@@ -154,7 +154,7 @@ webhook.update_config = function (req, resp) {
         url: '/webhook'
       }
     }
-    console.log(body)
+    // console.log(body)
     // Look for detailed error
     if (body.error) {
       json_response.message = JSON.parse(body.error).errors[0].message

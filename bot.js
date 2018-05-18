@@ -10,7 +10,7 @@ module.exports = {
     if (event.direct_message_events){
       event.direct_message_events.forEach(function(dm_event){
         console.log(dm_event.message_create.sender_id);
-      // twitter.send_dm(, 'hello');
+        twitter.send_dm(dm_event.message_create.sender_id, 'hello');
       });
     }
   }

@@ -8,6 +8,7 @@ const security = require('./helpers/security')
 const auth = require('./helpers/auth')
 const cacheRoute = require('./helpers/cache-route')
 const socket = require('./helpers/socket')
+const bot = require('./bot');
 
 const app = express()
 
@@ -63,7 +64,7 @@ app.get('/webhook/twitter', function(request, response) {
  **/
 app.post('/webhook/twitter', function(request, response) {
 
-  console.log(request.body)
+  bot.handle_event(request.body);
   
   socket.io.emit(socket.activity_event, {
     internal_id: uuid(),
