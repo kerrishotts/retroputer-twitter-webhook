@@ -17,7 +17,24 @@ nav, .card {
 }
 
 nav, .jumbotron, .card {
-  box-shadow: 0px 2px 5px #CCC;
+/*   box-shadow: 0px 2px 5px #CCC; */
+}
+
+body, a, .navbar a{
+  color: #4a4a4a;
+}
+
+
+a:hover,
+.navbar a:hover{
+  color: #000;
+}
+.navbar{
+  background-color: #fafafa;
+}
+.navbar a,
+.navbar a:hover{
+  transition: color 0.3s;
 }
 
 .json-event textarea {
