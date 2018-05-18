@@ -9,8 +9,12 @@ module.exports = {
     
     if (event.direct_message_events){
       event.direct_message_events.forEach(function(dm_event){
-        console.log(dm_event.message_create.sender_id);
-        twitter.send_dm(dm_event.message_create.sender_id, 'hello');
+        console.log(dm_event.message_create);
+        twitter.send_dm(dm_event.message_create.sender_id, 'hello', function(err){
+          if (err){
+            console.log(err);
+          }
+        });
       });
     }
   }

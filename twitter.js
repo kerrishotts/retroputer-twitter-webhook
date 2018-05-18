@@ -25,21 +25,23 @@ module.exports = {
       user_id: user_id,
       text: text
     }, function(err, data, response) {
+      if (err){
+        console.log('ERROR:\n', err);
+      }
       if (cb){
         cb(err, data, response);
       }
     });
-    
-    
   },
   post_image: function(text, image_base64, cb) {
    T.post('media/upload', { media_data: image_base64 }, function (err, data, response) {
       if (err){
         console.log('ERROR:\n', err);
-        if (cb){
-          cb(err);
-        }
       }
+      if (cb){
+        cb(err);
+      }
+     
       else{
         console.log('tweeting the image...');
         T.post('statuses/update', {
