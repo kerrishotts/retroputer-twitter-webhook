@@ -13,19 +13,19 @@ var auth = {}
 
 // twitter info
 auth.twitter_oauth = {
-  consumer_key: nconf.get('TWITTER_CONSUMER_KEY'),
-  consumer_secret: nconf.get('TWITTER_CONSUMER_SECRET'),
-  token: nconf.get('TWITTER_ACCESS_TOKEN'),
-  token_secret: nconf.get('TWITTER_ACCESS_TOKEN_SECRET')
+  consumer_key: process.env.CONSUMER_KEY,
+  consumer_secret: process.env.CONSUMER_SECRET,
+  token: process.env.ACCESS_TOKEN,
+  token_secret: process.env.ACCESS_TOKEN_SECRET
 }
-auth.twitter_webhook_environment = nconf.get('TWITTER_WEBHOOK_ENV')
+auth.twitter_webhook_environment = process.env.ENV_NAME
 
 
 // basic auth middleware for express
 auth.basic = httpAuth.connect(httpAuth.basic({
     realm: 'admin-dashboard'
 }, function(username, password, callback) {
-    callback(username == nconf.get('BASIC_AUTH_USER') && password == nconf.get('BASIC_AUTH_PASSWORD'))
+    callback(username == process.env.BASIC_AUTH_USER && password == process.env.BASIC_AUTH_PASSWORD)
 }))
 
 
