@@ -12,8 +12,6 @@ var config = {
     Twit = require('twit'),
     T = new Twit(config.twitter);
 
-console.log('Twit library loaded...');
-
 module.exports = {
   tweet: function(text, cb){
     T.post('statuses/update', { status: text }, function(err, data, response) {

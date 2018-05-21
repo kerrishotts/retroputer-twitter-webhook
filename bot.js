@@ -21,11 +21,11 @@ module.exports = {
         //   }
         // });
         
-        // twitter.send_dm(dm_event.message_create.sender_id, 'hello', function(err){
-        //   if (err){
-        //     console.log(err);
-        //   }
-        // });
+        twitter.send_dm(dm_event.message_create.sender_id, 'hello', function(err){
+          if (err){
+            console.log(err);
+          }
+        });
       });
     }
   }
