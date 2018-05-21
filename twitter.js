@@ -23,6 +23,30 @@ module.exports = {
   send_dm: function(user_id, text, cb){
     console.log('sending DM...');
 
+    T.post('direct_messages/events/new', {
+      'event': {
+        'type': 'message_create',
+        'message_create': {
+          'target': {
+            'recipient_id': user_id
+          },
+          'message_data': {
+            'text': text,
+          }
+        }
+      }
+    }, function(err, data, response) {
+      if (err){
+        console.log('ERROR:\n', err);
+      }
+      if (cb){
+        cb(err, data, response);
+      }
+    });
+  },  
+  send_dm_legacy: function(user_id, text, cb){
+    console.log('sending DM...');
+
     T.post('direct_messages/new', {
       user_id: user_id,
       text: text
