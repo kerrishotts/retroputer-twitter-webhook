@@ -14,12 +14,19 @@ module.exports = {
     if (event.direct_message_events){
       console.log('received new DM...');
       event.direct_message_events.forEach(function(dm_event){
-        console.log(dm_event.message_create);
-        twitter.send_dm(dm_event.message_create.sender_id, 'hello', function(err){
-          if (err){
-            console.log(err);
-          }
-        });
+        console.log(dm_event);
+        console.log(dm_event.message_create.message_data);
+        // twitter.tweet('hello world', function(err){
+        //   if (err){
+        //     console.log(err);
+        //   }
+        // });        
+        
+        // twitter.send_dm(dm_event.message_create.sender_id, 'hello', function(err){
+        //   if (err){
+        //     console.log(err);
+        //   }
+        // });
       });
     }
   }
