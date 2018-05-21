@@ -4,12 +4,11 @@ const twitter = require(__dirname + '/twitter.js'),
 
 module.exports = {
   handle_event: function(event) {
-    console.log(util.inspect(event, false, null));    
+    // console.log(util.inspect(event, false, null));    
 
-    
     if (event.direct_message_indicate_typing_events){
       event.direct_message_indicate_typing_events.forEach(function(typing_event){
-          console.log(`@${typing_event.users[typing_event.sender_id].screen_name} is typing...`);
+          console.log(`@${event.users[typing_event.sender_id].screen_name} is typing...`);
       });
     }    
     if (event.direct_message_events){
