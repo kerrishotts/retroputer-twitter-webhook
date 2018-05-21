@@ -12,6 +12,8 @@ var config = {
     Twit = require('twit'),
     T = new Twit(config.twitter);
 
+console.log('Twit library loaded...');
+
 module.exports = {
   tweet: function(text, cb){
     T.post('statuses/update', { status: text }, function(err, data, response) {
@@ -21,6 +23,8 @@ module.exports = {
     });    
   },
   send_dm: function(user_id, text, cb){
+    console.log('sending DM...');
+
     T.post('direct_messages/new', {
       user_id: user_id,
       text: text
