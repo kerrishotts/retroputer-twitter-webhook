@@ -8,4 +8,8 @@ twitterbot.on('direct_message_events', function(event){
     });
 });
 
+twitterbot.on('follow_events', function(follower){
+  console.log({follower});
+});
+
 const dashboard = require('./dashboard')(twitterbot);

@@ -129,7 +129,7 @@ module.exports = {
   },
   handle_event: function(event){
     var bot_behavior = this.bot_behavior;
-    console.log(util.inspect(event, false, null));
+    // console.log(util.inspect(event, false, null));
     
     if (event.direct_message_indicate_typing_events){
       event.direct_message_indicate_typing_events.forEach(function(typing_event){
@@ -161,9 +161,9 @@ module.exports = {
 
     if (event.follow_events){
       event.follow_events.forEach(function(follow_event){
-        var dm_sender = event.users[follow_event.message_create.sender_id].screen_name;
-        if (dm_sender !== process.env.BOT_USERNAME){
-          console.log(`received new DM from @${dm_sender}...`);
+        var new_follower = follow_event.source.screen_name;
+        if (new_follower !== process.env.BOT_USERNAME){
+          console.log(`@${new_follower} started following...`);
           
           if (bot_behavior['follow_events']){
             bot_behavior['follow_events'].forEach(function(fn){
