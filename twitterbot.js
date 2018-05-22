@@ -154,7 +154,7 @@ module.exports = {
 
           if (bot_behavior[event]){
             bot_behavior[event].forEach(function(fn){
-              fn(event);
+              fn(dm_event.message_create);
             });
           }
           
