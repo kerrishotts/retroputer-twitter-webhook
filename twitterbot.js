@@ -178,7 +178,6 @@ module.exports = {
       event.tweet_create_events.forEach(function(tweet_create_event){
         console.log(util.inspect(tweet_create_event, false, null));
         
-        return false;
         var tweet_from_screen_name = tweet_create_event.user.screen_name;
         if (tweet_from_screen_name !== process.env.BOT_USERNAME){
           // console.log(`new tweet from @${tweet_from_screen_name}...`);
@@ -186,6 +185,26 @@ module.exports = {
           if (bot_behavior['tweet_create_events']){
             bot_behavior['tweet_create_events'].forEach(function(fn){
               fn(tweet_create_event);
+            });
+          }
+        }
+      });
+    }    
+  
+    
+    if (event.favorite_events){
+      event.favorite_events.forEach(function(favorite_event){
+        // console.log(util.inspect(favorite_event, false, null));
+        var favorite_event_user_screen_name = favorite_event.favorited_status.user.screen_name;
+
+        console.log(favorite_event_user_screen_name);
+        
+        if (favorite_event_user_screen_name !== process.env.BOT_USERNAME){
+          console.log(`@${favorite_event_user_screen_name} favorited a tweet...`);
+          
+          if (bot_behavior['favorite_events']){
+            bot_behavior['favorite_events'].forEach(function(fn){
+              fn(favorite_event.favorited_status, favorite_event.user);
             });
           }
         }
