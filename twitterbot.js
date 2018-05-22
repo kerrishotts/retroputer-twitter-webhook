@@ -227,15 +227,12 @@ module.exports = {
     }
 
     if (event.direct_message_mark_read_events){
-      console.log(util.inspect(event, false, null));
+      // console.log(util.inspect(event, false, null));
       
       event.direct_message_mark_read_events.forEach(function(direct_message_mark_read_event){
-        console.log(util.inspect(direct_message_mark_read_event, false, null));
-        var direct_message_mark_read_event_user_screen_name = event.users[direct_message_mark_read_event.message_create.sender_id].screen_name;
+        var direct_message_mark_read_event_user_screen_name = event.users[direct_message_mark_read_event.sender_id].screen_name;
 
-        if (direct_message_mark_read_event_user_screen_name !== process.env.BOT_USERNAME){
-          console.log(`@${direct_message_mark_read_event_user_screen_name} read your message...`);
-          
+        if (direct_message_mark_read_event_user_screen_name !== process.env.BOT_USERNAME){          
           if (bot_behavior['direct_message_mark_read_events']){
             bot_behavior['direct_message_mark_read_events'].forEach(function(fn){
               fn(direct_message_mark_read_event.favorited_status, direct_message_mark_read_event.user);
@@ -244,8 +241,7 @@ module.exports = {
         }
       });
     }
-
-
+    
 
   }
 };
