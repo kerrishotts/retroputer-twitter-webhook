@@ -117,8 +117,21 @@ module.exports = {
         }
       }
     });
+  },
+  bot_behavior: [],
+  on: function(event, event_handler){
+    if (this.bot_behavior[event]){
+        this.bot_behavior[event].push(event_handler);
+    }
+    else{
+        this.bot_behavior[event] = [event_handler];
+    }
+  },
+  handle_event: function(event){
+    var bot_behavior = this.bot_behavior;
+    console.log(bot_behavior);    
   },  
-  handle_event: function(event) {
+  __handle_event: function(event) {
     console.log(util.inspect(event, false, null));
     
     if (event.direct_message_indicate_typing_events){
