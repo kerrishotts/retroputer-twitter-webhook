@@ -137,7 +137,9 @@ module.exports = {
           if (user_typing !== process.env.BOT_USERNAME){
             console.log(`@${user_typing} is typing...`);
             if (bot_behavior[event]){
-              bot_behavior[event](event);
+              bot_behavior[event].forEach(function(fn){
+                fn(event);
+              });
             }
           }
       });
@@ -150,6 +152,12 @@ module.exports = {
           console.log(`received new DM from @${dm_sender}...`);
           console.log(dm_event.message_create.message_data);
 
+          if (bot_behavior[event]){
+            bot_behavior[event].forEach(function(fn){
+              fn(event);
+            });
+          }
+          
           // twitter.send_dm(dm_event.message_create.sender_id, 'hello', function(err){
           //   if (err){
           //     console.log(err);
