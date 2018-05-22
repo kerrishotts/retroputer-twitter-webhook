@@ -189,15 +189,12 @@ module.exports = {
           }
         }
       });
-    }    
-  
+    }
     
     if (event.favorite_events){
       event.favorite_events.forEach(function(favorite_event){
         // console.log(util.inspect(favorite_event, false, null));
-        var favorite_event_user_screen_name = favorite_event.favorited_status.user.screen_name;
-
-        console.log(favorite_event_user_screen_name);
+        var favorite_event_user_screen_name = favorite_event.user.screen_name;
         
         if (favorite_event_user_screen_name !== process.env.BOT_USERNAME){
           console.log(`@${favorite_event_user_screen_name} favorited a tweet...`);
@@ -209,8 +206,46 @@ module.exports = {
           }
         }
       });
-    }    
-  
-  
+    }
+
+
+    if (event.block_events){
+      event.block_events.forEach(function(block_event){
+        // console.log(util.inspect(block_event, false, null));
+        var block_event_user_screen_name = block_event.user.screen_name;
+        
+        if (block_event_user_screen_name !== process.env.BOT_USERNAME){
+          console.log(`@${block_event_user_screen_name} favorited a tweet...`);
+          
+          if (bot_behavior['block_events']){
+            bot_behavior['block_events'].forEach(function(fn){
+              fn(block_event.favorited_status, block_event.user);
+            });
+          }
+        }
+      });
+    }
+
+    if (event.direct_message_mark_read_events){
+      console.log(util.inspect(event, false, null));
+      
+      event.direct_message_mark_read_events.forEach(function(direct_message_mark_read_event){
+        console.log(util.inspect(direct_message_mark_read_event, false, null));
+        var direct_message_mark_read_event_user_screen_name = event.users[direct_message_mark_read_event.message_create.sender_id].screen_name;
+
+        if (direct_message_mark_read_event_user_screen_name !== process.env.BOT_USERNAME){
+          console.log(`@${direct_message_mark_read_event_user_screen_name} read your message...`);
+          
+          if (bot_behavior['direct_message_mark_read_events']){
+            bot_behavior['direct_message_mark_read_events'].forEach(function(fn){
+              fn(direct_message_mark_read_event.favorited_status, direct_message_mark_read_event.user);
+            });
+          }
+        }
+      });
+    }
+
+
+
   }
 };
