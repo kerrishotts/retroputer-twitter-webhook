@@ -1,16 +1,16 @@
 var config = {
-      twitter: {
-        username: process.env.BOT_USERNAME,
-     /* Be sure to update the .env file with your API keys.
-        See how to get them: https://botwiki.org/tutorials/how-to-create-a-twitter-app */
-        consumer_key: process.env.CONSUMER_KEY,
-        consumer_secret: process.env.CONSUMER_SECRET,
-        access_token: process.env.ACCESS_TOKEN,
-        access_token_secret: process.env.ACCESS_TOKEN_SECRET
-      }
+      username: process.env.BOT_USERNAME,
+   /* Be sure to update the .env file with your API keys.
+      See how to get them: https://botwiki.org/tutorials/how-to-create-a-twitter-app */
+      consumer_key: process.env.CONSUMER_KEY,
+      consumer_secret: process.env.CONSUMER_SECRET,
+      access_token: process.env.ACCESS_TOKEN,
+      access_token_secret: process.env.ACCESS_TOKEN_SECRET
     },
     Twit = require('twit'),
-    T = new Twit(config.twitter);
+    T = new Twit(config),
+    helpers = require(__dirname + '/helpers.js'),
+    util = require('util');
 
 module.exports = {
   tweet: function(text, cb){
@@ -35,21 +35,6 @@ module.exports = {
           }
         }
       }
-    }, function(err, data, response) {
-      if (err){
-        console.log('ERROR:\n', err);
-      }
-      if (cb){
-        cb(err, data, response);
-      }
-    });
-  },  
-  send_dm_legacy: function(user_id, text, cb){
-    console.log('sending DM...');
-
-    T.post('direct_messages/new', {
-      user_id: user_id,
-      text: text
     }, function(err, data, response) {
       if (err){
         console.log('ERROR:\n', err);
@@ -132,5 +117,36 @@ module.exports = {
         }
       }
     });
-  }  
+  },  
+  handle_event: function(event) {
+    console.log(util.inspect(event, false, null));
+    
+    if (event.direct_message_indicate_typing_events){
+      event.direct_message_indicate_typing_events.forEach(function(typing_event){
+        var user_typing = event.users[typing_event.sender_id].screen_name;
+          if (user_typing !== process.env.BOT_USERNAME){
+
+            console.log(`@${user_typing} is typing...`);
+
+          }
+      });
+    }    
+    if (event.direct_message_events){
+      event.direct_message_events.forEach(function(dm_event){
+        var dm_sender = event.users[dm_event.message_create.sender_id].screen_name;
+        if (dm_sender !== process.env.BOT_USERNAME){
+
+          console.log(`received new DM from @${dm_sender}...`);
+          console.log(dm_event.message_create.message_data);
+
+          twitter.send_dm(dm_event.message_create.sender_id, 'hello', function(err){
+            if (err){
+              console.log(err);
+            }
+          });
+
+        }
+      });
+    }
+  }
 };
