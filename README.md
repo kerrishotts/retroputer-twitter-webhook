@@ -10,9 +10,9 @@ This starter projects is based on [account-activity-dashboard](https://github.co
 ## Tutorial
 
 - [Set up your app](#set-up-your-app)
-- Write your bot code
+- [Write your bot code](#write-bot-code)
 
-<h3 name="set-up-your-app">Set up your app</h3>
+### Set up your app
 
 
 1. Remix this app.
