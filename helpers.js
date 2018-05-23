@@ -56,7 +56,7 @@ module.exports = {
   },
   load_remote_image: function(img_url, cb) {
     if (!img_url){
-      console.log('missing remote image URL');
+      console.log('missing remote image URL...');
       return false;
     }
     console.log(`loading remote image: ${img_url} ...`);
