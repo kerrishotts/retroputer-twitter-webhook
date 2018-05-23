@@ -1,3 +1,5 @@
+# `*** WORK IN PROGRESS ***`
+
 ![Hello, bot!](https://cdn.glitch.com/83eb7282-8b27-4a01-9b8c-1c12487c6c08%2Fhello-bot.png?1526659763652)
 
 # Twitter Bot Starter Project with Webhooks and Account Activity API
@@ -6,6 +8,12 @@ This starter projects is based on [account-activity-dashboard](https://github.co
 
 
 ## Tutorial
+
+- [Set up your app](#set-up-your-app)
+- Write your bot code
+
+<h3 name="set-up-your-app">Set up your app</h3>
+
 
 1. Remix this app.
 
