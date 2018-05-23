@@ -16,23 +16,22 @@ This starter projects is based on [account-activity-dashboard](https://github.co
 4. From the **Keys and Access Tokens** tab, copy the `consumer key`, `consumer secret`, `access token` and `access token secret` and add them to your `.env` file. Also update `ENV_NAME` and
 `BOT_USERNAME` with the name of your development environment and your bot's screen name.
 
-5. Your webhook URL will be:
 
-    ```text
-    https://PROJECTNAME.glitch.me/webhook/twitter
-    ```
-
-6. Take note of the deployed URL, revisit your apps.twitter.com **Settings** page, and add the following URL values as whitelisted Callback URLs:
+5. Take note of the deployed URL, revisit your apps.twitter.com **Settings** page, and add the following URL values as whitelisted Callback URLs:
 
     ```text
     https://PROJECTNAME.glitch.me/callbacks/addsub
     https://PROJECTNAME.glitch.me/callbacks/removesub
     ```
 
-7. To configure your webhook you can use this apps' web UI, or use the example scripts from the command line.
+6. To configure your webhook you can use this apps' web UI (use the **Show** button). Your webhook URL will be:
+
+    ```text
+    https://PROJECTNAME.glitch.me/webhook/twitter
+    ```
 
 
-8. Load the web app in your browser and follow the instructions below.
+7. Load the web app in your browser and follow the instructions below.
 
   1. Setup webhook config. Navigate to the "manage webhook" view. Enter your webhook URL noted earlier and click "Create/Update."
 
@@ -41,3 +40,4 @@ This starter projects is based on [account-activity-dashboard](https://github.co
 ## TODO:
 
 - make Account Activity log persistent (1 week?)
+- store API calls in a queue 
