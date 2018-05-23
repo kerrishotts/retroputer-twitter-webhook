@@ -15,27 +15,27 @@ This starter projects is based on [account-activity-dashboard](https://github.co
 
 4. On the **Keys and Access Tokens** tab > **Your Access Token** section > click **Create my access token** button.
 
-5. From the **Keys and Access Tokens** tab, copy the `consumer key`, `consumer secret`, `access token` and `access token secret` and add them to your `.env` file. Also update `ENV_NAME` and
-`BOT_USERNAME` with the name of your development environment and your bot's screen name.
+5. From the **Keys and Access Tokens** tab, copy the `consumer key`, `consumer secret`, `access token` and `access token secret` and add them to your `.env` file. You can also set `BOT_USERNAME`to your bot's screen name (without the @).
 
-6. [Apply for a developer account](https://developer.twitter.com/en/apply/user), if you don't have one yet.
-
-7. Once you have your developer account, go to your developer dashboard and [create a new environment](https://developer.twitter.com/en/account/environments) for **Account Activity APISandbox**. 
-
-6. Take note of the deployed URL, revisit your apps.twitter.com **Settings** page, and add the following URL values as whitelisted Callback URLs:
+6. On the **Settings** page, add the following URL values as whitelisted Callback URLs:
 
     ```text
     https://PROJECTNAME.glitch.me/callbacks/addsub
     https://PROJECTNAME.glitch.me/callbacks/removesub
     ```
 
-7. To configure your webhook you can use this apps' web UI (use the **Show** button). Your webhook URL will be:
+7. [Apply for a developer account](https://developer.twitter.com/en/apply/user), if you don't have one yet.
+
+8. Once you have your developer account, go to your developer dashboard and [create a new environment](https://developer.twitter.com/en/account/environments) for **Account Activity APISandbox**. Save the environment name as `ENV_NAME` in your `.env` file.
+
+
+9.  Your webhook URL will be:
 
     ```text
     https://PROJECTNAME.glitch.me/webhook/twitter
     ```
 
-8. Load the web app in your browser and follow the instructions below.
+10. Load the web app in your browser (use the **Show** button) and follow the instructions below.
 
   1. Setup webhook config. Navigate to the "manage webhook" view. Enter your webhook URL noted earlier and click "Create/Update."
 
