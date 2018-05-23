@@ -29,17 +29,13 @@ This starter projects is based on [account-activity-dashboard](https://github.co
 8. Once you have your developer account, go to your developer dashboard and [create a new environment](https://developer.twitter.com/en/account/environments) for **Account Activity APISandbox**. Save the environment name as `ENV_NAME` in your `.env` file.
 
 
-9.  Your webhook URL will be:
+9. To configure your webhook, load this web app in your browser (use the **Show** button) and follow the instructions below:
 
-    ```text
-    https://PROJECTNAME.glitch.me/webhook/twitter
-    ```
+<!-->
 
-10. Load the web app in your browser (use the **Show** button) and follow the instructions below.
+  1. **Setup webhook config.** Navigate to the "manage webhook" view. Enter your webhook URL as `https://PROJECTNAME.glitch.me/webhook/twitter` and click "Create/Update."
 
-  1. Setup webhook config. Navigate to the "manage webhook" view. Enter your webhook URL noted earlier and click "Create/Update."
-
-  2. Add a user subscription. Navigate to the "manage subscriptions" view. Click "add" and proceed with Twitter sign-in. Once complete your webhook will start to receive account activity events for the user.
+  2. **Add a user subscription.** Navigate to the "manage subscriptions" view. Click "add" and proceed with Twitter sign-in. Once complete your webhook will start to receive account activity events for the user.
 
 ## TODO:
 
