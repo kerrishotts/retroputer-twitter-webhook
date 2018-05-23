@@ -13,7 +13,8 @@ This starter projects is based on [account-activity-dashboard](https://github.co
 
 3. On the **Keys and Access Tokens** tab > **Your Access Token** section > click **Create my access token** button.
 
-4. From the **Keys and Access Tokens** tab, copy the `consumer key`, `consumer secret`, `access token` and `access token secret` and add them to your `.env` file.
+4. From the **Keys and Access Tokens** tab, copy the `consumer key`, `consumer secret`, `access token` and `access token secret` and add them to your `.env` file. Also update `ENV_NAME` and
+`BOT_USERNAME` with the name of your development environment and your bot's screen name.
 
 5. Your webhook URL will be:
 
