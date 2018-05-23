@@ -45,7 +45,27 @@ This starter projects is based on [account-activity-dashboard](https://github.co
 
   2. **Add a user subscription.** Navigate to the "manage subscriptions" view. Click "add" and proceed with Twitter sign-in. Once complete your webhook will start to receive account activity events for the user.
 
+
+### Write your bot code
+
+All your bot code will be inside `app.js`. There is a few helper methods  in `twitterbot.js` that you can use, like `tweet` or `send_dm`. You can see the current `app.js` for some examples.
+
+
+```
+const twitterbot = require('./twitterbot');
+
+twitterbot.on('direct_message_events', function(dm){
+    twitterbot.send_dm(dm.sender_id, 'hello', function(err){
+      if (err){
+        console.log(err);
+      }
+    });
+});
+
+const dashboard = require('./dashboard')(twitterbot);
+```
+
 ## TODO:
 
 - make Account Activity log persistent (1 week?)
-- store API calls in a queue 
+- store API calls in a queue and work around the API rate limits
