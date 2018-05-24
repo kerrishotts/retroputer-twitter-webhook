@@ -9,9 +9,9 @@ This starter projects is based on [account-activity-dashboard](https://github.co
 
 ## Tutorial
 
+<!--
 - [Set up your app](#set-up-your-app)
-- [Write your bot code](#write-bot-code)
-
+- [Write your bot code](#write-bot-code) -->
 ### Set up your app
 
 
@@ -48,7 +48,7 @@ This starter projects is based on [account-activity-dashboard](https://github.co
 
 ### Write your bot code
 
-All your bot code will be inside `app.js`. There is a few helper methods  in `twitterbot.js` that you can use, like `tweet` or `send_dm`. You can see the current `app.js` for some examples.
+All your bot code will be inside `app.js`. You can access the [twit](https://github.com/ttezel/twit) library as `twitterbot.twit`, and there is a few helper methods  in `twitterbot.js`, like `tweet` or `send_dm`. 
 
 
 ```
@@ -65,7 +65,10 @@ twitterbot.on('direct_message_events', function(dm){
 const dashboard = require('./dashboard')(twitterbot);
 ```
 
+Be sure to check out the `examples` folder, and join us over at botmakers.org!
+
 ## TODO:
 
 - make Account Activity log persistent (1 week?)
 - store API calls in a queue and work around the API rate limits
+- save the ID of the events the bot already responded to
