@@ -1,3 +1,6 @@
+/*
+  https://developer.twitter.com/en/docs/direct-messages/quick-replies/api-reference/options
+*/
 const twitterbot = require('./twitterbot');
 
 twitterbot.on('direct_message_events', function(dm){
