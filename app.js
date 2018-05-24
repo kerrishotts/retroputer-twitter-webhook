@@ -10,7 +10,7 @@ twitterbot.on('direct_message_events', function(dm){
 
 twitterbot.on('follow_events', function(follower){
   /*
-    See what a user object looks like:
+    See what a 'follower' user object looks like:
     https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/user-object.html
   */
   console.log({follower});

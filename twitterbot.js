@@ -13,6 +13,7 @@ var config = {
     util = require('util');
 
 module.exports = {
+  // twit: T,
   tweet: function(text, cb){
     T.post('statuses/update', { status: text }, function(err, data, response) {
       if (cb){
