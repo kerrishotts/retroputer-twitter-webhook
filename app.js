@@ -7,15 +7,17 @@ twitterbot.on('tweet_create_events', function(tweet){
   */
   // console.log({tweet});
   
-  twitterbot.tweet();
+  var text = 'hello';
 
-  // tweet: function(text, cb){
-  //   T.post('statuses/update', { status: text }, function(err, data, response) {
-  //     if (cb){
-  //       cb(err, data, response);
-  //     }
-  //   });    
-  // },  
+  twitterbot.twit.post('statuses/update', {
+    status: text,
+    in_reply_to_status_id: '',
+    auto_populate_reply_metadata: true
+  }, function(err, data, response) {
+    if (err){
+      console.log('Error', err);
+    }
+  });  
   
 //   tweet.user.screen_name
 });
