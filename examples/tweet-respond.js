@@ -9,12 +9,19 @@ twitterbot.on('tweet_create_events', function(tweet){
     https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update.html
   */
   
-  var text = 'hello 👋';
-  
-/*
-  You can look at tweet.text to and change your bot's response based on the text from the tweet.
-*/  
+  var text;  
 
+  /*
+    tweet.text contains the text from the tweet.
+  */  
+  
+  if (tweet.text.toLowerCase().match(/(hello|hi)/g)){
+    text = 'hello 👋';
+  }
+  else{
+    text = '¯\_(ツ)_/¯';
+  }
+  
   twitterbot.twit.post('statuses/update', {
     status: text,
     in_reply_to_status_id: tweet.id_str,
