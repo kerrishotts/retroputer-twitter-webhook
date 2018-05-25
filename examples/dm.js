@@ -1,31 +1,36 @@
 const twitterbot = require('./twitterbot');
 
 twitterbot.on('direct_message_events', function(dm){
-  if (dm.message_data.quick_reply_response){
-    twitterbot.send_dm(dm.sender_id, `Okay, I'll get your ${dm.message_data.text.toLowerCase()} 😊`, function(err){
-      if (err){
-        console.log(err);
-      }
-    });
-  } else {
-    twitterbot.twit.post('direct_messages/events/new', {
-      'event': {
-        'type': 'message_create',
-        'message_create': {
-          'target': {
-            'recipient_id': dm.sender_id
-          },
-          'message_data': {
-            'text': 'What can I get you?'
-          }
+  var text;
+
+  /*
+    dm.message_data.text contains the text from the DM.
+  */  
+  
+  if (dm.message_data.text.toLowerCase().match(/(hello|hi)/g)){
+    text = 'hello 👋';
+  }
+  else{
+    text = '¯\_(ツ)_/¯';
+  }
+
+  twitterbot.twit.post('direct_messages/events/new', {
+    'event': {
+      'type': 'message_create',
+      'message_create': {
+        'target': {
+          'recipient_id': dm.sender_id
+        },
+        'message_data': {
+          'text': 'Hello!'
         }
       }
-    }, function(err, data, response) {
-      if (err){
-        console.log('ERROR:\n', err);
-      }
-    });
-  }
+    }
+  }, function(err, data, response) {
+    if (err){
+      console.log('ERROR:\n', err);
+    }
+  });  
 });
 
 /*
@@ -33,7 +38,7 @@ twitterbot.on('direct_message_events', function(dm){
 */
 
 twitterbot.on('direct_message_events', function(dm){
-    twitterbot.send_dm(dm.sender_id, 'hello', function(err){
+    twitterbot.send_dm(dm.sender_id, 'Hello!', function(err){
       if (err){
         console.log(err);
       }
