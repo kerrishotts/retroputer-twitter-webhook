@@ -184,11 +184,10 @@ module.exports = {
   
     if (event.tweet_create_events){
       event.tweet_create_events.forEach(function(tweet_create_event){
-        console.log(util.inspect(tweet_create_event, false, null));
         
         var tweet_from_screen_name = tweet_create_event.user.screen_name;
         if (tweet_from_screen_name !== process.env.BOT_USERNAME){
-          // console.log(`new tweet from @${tweet_from_screen_name}...`);
+          console.log(`new tweet from @${tweet_from_screen_name}...`);
           
           if (bot_behavior['tweet_create_events']){
             bot_behavior['tweet_create_events'].forEach(function(fn){
