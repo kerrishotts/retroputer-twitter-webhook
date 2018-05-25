@@ -227,7 +227,7 @@ module.exports = {
           
           if (bot_behavior['block_events']){
             bot_behavior['block_events'].forEach(function(fn){
-              fn(block_event.favorited_status, block_event.user);
+              fn(block_event.user);
             });
           }
         }
