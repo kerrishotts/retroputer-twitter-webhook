@@ -17,13 +17,14 @@ twitterbot.on('follow_events', function(follower){
 
 /*
   Or with a helper function.
-*/
 
   twitterbot.tweet(`@${follower.screen_name} Thanks for the follow!`, function(err, data, response){
     if (err){
       console.log('Error', err);
     }
   });  
+
+*/
 
 });
 
