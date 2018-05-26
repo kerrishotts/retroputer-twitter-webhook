@@ -9,9 +9,6 @@ This starter projects is based on [account-activity-dashboard](https://github.co
 
 ## Tutorial
 
-<!--
-- [Set up your app](#set-up-your-app)
-- [Write your bot code](#write-bot-code) -->
 ### Set up your app
 
 
