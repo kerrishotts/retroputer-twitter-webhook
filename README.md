@@ -1,5 +1,3 @@
-# `*** WORK IN PROGRESS ***`
-
 ![Hello, bot!](https://cdn.glitch.com/83eb7282-8b27-4a01-9b8c-1c12487c6c08%2Fhello-bot.png?1526659763652)
 
 # Twitter Bot Starter Project with Webhooks and Account Activity API
@@ -14,7 +12,7 @@ This starter projects is based on [account-activity-dashboard](https://github.co
 
 1. Remix this app.
 
-2. Create a Twitter app on [apps.twitter.com](https://apps.twitter.com/)
+2. [Create a Twitter app](https://botwiki.org/tutorials/how-to-create-a-twitter-app/)
 
 3. On the **Permissions** tab > **Access** section > enable **Read, Write and Access direct messages**.
 
