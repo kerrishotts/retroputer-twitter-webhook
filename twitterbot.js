@@ -21,6 +21,24 @@ module.exports = {
       }
     });    
   },
+  retweet: function(tweet_id, cb){
+    T.post('statuses/retweet/:id', { id: tweet_id }, function (err, data, response) {
+      if (cb){
+        cb(err, data, response);
+      }
+    })
+  },
+  reply: function(tweet_id, status, cb){
+    T.post('statuses/update',{
+      in_reply_to_status_id: tweet_id,
+      auto_populate_reply_metadata: true,
+      status: status
+    }, function(err, data, response) {
+      if (cb){
+        cb(err);
+      }
+    });
+  },  
   send_dm: function(user_id, text, cb){
     console.log('sending DM...');
     T.post('direct_messages/indicate_typing', {
