@@ -8,10 +8,10 @@ var auth = {}
 
 // twitter info
 auth.twitter_oauth = {
-  consumer_key: process.env.CONSUMER_KEY,
-  consumer_secret: process.env.CONSUMER_SECRET,
-  token: process.env.ACCESS_TOKEN,
-  token_secret: process.env.ACCESS_TOKEN_SECRET
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  token: process.env.TWITTER_ACCESS_TOKEN,
+  token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 }
 auth.twitter_webhook_environment = process.env.ENV_NAME
 
@@ -30,8 +30,8 @@ auth.csrf = require('csurf')()
 
 // Configure the Twitter strategy for use by Passport.
 passport.use(new TwitterStrategy({
-    consumerKey: process.env.CONSUMER_KEY,
-    consumerSecret: process.env.CONSUMER_SECRET,
+    consumerKey: process.env.TWITTER_CONSUMER_KEY,
+    consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
     // we want force login, so we set the URL with the force_login=true
     userAuthorizationURL: 'https://api.twitter.com/oauth/authenticate?force_login=true'
   },

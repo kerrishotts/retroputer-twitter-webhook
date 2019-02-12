@@ -1,3 +1,8 @@
+if ( !process.env.TWITTER_CONSUMER_KEY || !process.env.TWITTER_CONSUMER_SECRET || !process.env.TWITTER_ACCESS_TOKEN || !process.env.TWITTER_ACCESS_TOKEN_SECRET ){
+  console.log('Please update your .env file with Twitter API keys.');
+  process.exit();
+}
+
 const twitterbot = require('./twitterbot');
 
 /*
