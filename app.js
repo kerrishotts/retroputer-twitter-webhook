@@ -43,7 +43,7 @@ twitterbot.on('direct_message_events', async function(dm){
   console.log(dm.sender_id);
   
   const incomingTweet = entities.decode(dm.message_data.text);
-  if (incomingTweet.indexOf("@retroputer") > 0) return; // ignore tweets that aren't directly @ us, like people talking _about_ us
+  if (incomingTweet.toLowerCase().indexOf("@retroputer") > 0) return; // ignore tweets that aren't directly @ us, like people talking _about_ us
   
   const asm = incomingTweet.replace(/@retroputer/g, "").trim()
                            .replace(/https:\/\/t.co\/[A-Za-z0-9]*/g, "");
@@ -83,7 +83,8 @@ twitterbot.on('direct_message_events', async function(dm){
 twitterbot.on('tweet_create_events', async function(tweet){
   
   const incomingTweet = entities.decode((tweet.extended_tweet && tweet.extended_tweet.full_text) || tweet.text);
-  if (incomingTweet.indexOf("@retroputer") > 0) return; // ignore tweets that aren't directly @ us, like people talking _about_ us
+  if (incomingTweet.toLowerCase().indexOf("@retroputer") > 0) return; // ignore tweets that aren't directly @ us, like people talking _about_ us
+
   
   const asm = incomingTweet.replace(/@retroputer/g, "").trim()
                            .replace(/https:\/\/t.co\/[A-Za-z0-9]*/g, "");
