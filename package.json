@@ -29,7 +29,8 @@
     "uuid": "^3.2.1",
     "twit": "^2.2.9",
     "btoa": "^1.2.1",
-    "cross-fetch": "^3.0.3"
+    "cross-fetch": "^3.0.3",
+    "pngjs": "^5.0.0"
   },
   "repository": {
     "type": "git",

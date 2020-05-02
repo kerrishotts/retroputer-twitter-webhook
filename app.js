@@ -22,8 +22,8 @@ async function sendToRetroputer(asm) {
       finishScreen: "yes"
     })
   });
-  const buffer = await r.arrayBuffer();
-  return buffer;
+  const json = await r.json();
+  return json;
 }
 
 /*
@@ -41,13 +41,38 @@ twitterbot.on('direct_message_events', function(dm){
 
 twitterbot.on('tweet_create_events', async function(tweet){
   
-  const incomingTweet = tweet.text.replace(/@retroputer/g, "");
+  const incomingTweet = tweet.text;
+  if (incomingTweet.indexOf("@retroputer") > 0) return; // ignore tweets that aren't directly @ us, like people talking _about_ us
   
-  const buffer = await sendToRetroputer(incomingTweet);
-  console.log(buffer);
+  const asm = incomingTweet.replace(/@retroputer/g, "");
+  
+  const r = await sendToRetroputer(asm);
+  console.log(r);
+  
+  if (r.error) {
+    twitterbot.twit.post('statuses/update', {
+      status: `Retroputer didn't like that: ${r.error}`.substr(0, 240),
+      in_reply_to_status_id: tweet.id_str,
+      auto_populate_reply_metadata: true
+    }, function(err, data, response) {
+      if (err){
+        console.log('Error', err);
+      }
+    });      
+    return;
+  }
 
-  twitterbot.post_image_in_reply_to(tweet.id_str, "Results", buffer, (d) => {
-    console.log("Posted?", d)
+  console.log("Frame", r.frame.length);
+  
+  const png = new (require("pngjs").PNG)({ width: 640, height: 480 });
+  png.data = r.frame || [];
+  
+  console.log("PNG", png.data.length);
+  
+  twitterbot.post_image_in_reply_to(tweet.id_str, "Results", png.data, (d) => {
+    if (d.statusCode === 400) {
+      console.log("Failed to post", d.message)    
+    }
   });
 
 /*  
