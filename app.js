@@ -7,6 +7,9 @@ const twitterbot = require('./twitterbot');
 const fetch = require("cross-fetch");
 const PNG = require("pngjs").PNG;
 const btoa = require("btoa");
+const Entities = require('html-entities').AllHtmlEntities;
+ 
+const entities = new Entities();
 
 
 const endpoint = process.env.RETROPUTER_ENDPOINT;
@@ -46,7 +49,7 @@ twitterbot.on('direct_message_events', function(dm){
 
 twitterbot.on('tweet_create_events', async function(tweet){
   
-  const incomingTweet = tweet.extended_tweet.full_text;
+  const incomingTweet = entities.decode(tweet.extended_tweet.full_text);
   if (incomingTweet.indexOf("@retroputer") > 0) return; // ignore tweets that aren't directly @ us, like people talking _about_ us
   
   const asm = incomingTweet.replace(/@retroputer/g, "").trim()
