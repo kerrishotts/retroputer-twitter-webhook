@@ -6,6 +6,7 @@ if ( !process.env.TWITTER_CONSUMER_KEY || !process.env.TWITTER_CONSUMER_SECRET |
 const twitterbot = require('./twitterbot');
 const fetch = require("cross-fetch");
 const PNG = require("pngjs").PNG;
+const btoa = require("btoa");
 
 
 const endpoint = process.env.RETROPUTER_ENDPOINT;
@@ -67,15 +68,19 @@ twitterbot.on('tweet_create_events', async function(tweet){
     return;
   }
 
-  console.log("Frame", r.frame.byteLength);
+  console.log("Frame", typeof r.frame, r.frame.length, Array.isArray(r.frame));
   
-  const png = new (require("pngjs").PNG)({ width: 640, height: 480 });
-  png.data = Buffer.from(r.frame) || [];
-  PNG.PNG.sync.write(png));
-  console.log("PNG", png.data.length);
+  if (!r.frame) {
+    console.log("No frame to render");
+    return;
+  }
   
-  twitterbot.post_image_in_reply_to(tweet.id_str, "Results", png.data, (d) => {
-    if (d.statusCode === 400) {
+  const png = new PNG({ width: 640, height: 480 });
+  png.data = r.frame || [];
+  const buffer = PNG.sync.write(png);
+  
+  twitterbot.post_image_in_reply_to(tweet.id_str, "Results", btoa(buffer), (d) => {
+    if (d && d.statusCode === 400) {
       console.log("Failed to post", d.message)    
     }
   });
