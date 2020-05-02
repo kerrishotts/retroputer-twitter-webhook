@@ -102,8 +102,8 @@ module.exports = {
       }
     });
   },  
-  post_image_in_reply_to: function(tweet_id, text, image_base64, cb) {
-   T.post('media/upload', { media_data: image_base64 }, function (err, data, response) {
+  post_image_in_reply_to: function(tweet_id, text, image, cb) {
+   T.post('media/upload', { media: image }, function (err, data, response) {
       if (err){
         console.log('ERROR:\n', err);
       }

@@ -15,14 +15,14 @@ async function sendToRetroputer(asm) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "image/png"
+      "Accept": "application/json"
     },
     body: JSON.stringify({
       asm,
       finishScreen: "yes"
     })
   });
-  const buffer = await r.arraybuffer();
+  const buffer = await r.arrayBuffer();
   return buffer;
 }
 
@@ -44,8 +44,9 @@ twitterbot.on('tweet_create_events', async function(tweet){
   const incomingTweet = tweet.text.replace(/@retroputer/g, "");
   
   const buffer = await sendToRetroputer(incomingTweet);
+  console.log(buffer);
 
-  twitterbot.post_image_in_reply_to(tweet.id_str, "Results", require("btoa")(buffer), (d) => {
+  twitterbot.post_image_in_reply_to(tweet.id_str, "Results", buffer, (d) => {
     console.log("Posted?", d)
   });
 
@@ -53,11 +54,7 @@ twitterbot.on('tweet_create_events', async function(tweet){
   
   
   var text;  
-
-  /*
-    tweet.text contains the text from the tweet.
-  */  
-  
+ 
   if (tweet.text.toLowerCase().match(/(hello|hi)/g)){
     text = 'hello 👋';
   }
