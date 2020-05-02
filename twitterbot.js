@@ -102,6 +102,40 @@ module.exports = {
       }
     });
   },  
+  post_image_in_reply_to: function(tweet_id, text, image_base64, cb) {
+   T.post('media/upload', { media_data: image_base64 }, function (err, data, response) {
+      if (err){
+        console.log('ERROR:\n', err);
+      }
+      if (cb){
+        cb(err);
+      }
+     
+      else{
+        console.log('tweeting the image...');
+        T.post('statuses/update', {
+          status: text,
+          in_reply_to_status_id: tweet_id,
+          media_ids: new Array(data.media_id_string)
+        },
+        function(err, data, response) {
+          if (err){
+            console.log('ERROR:\n', err);
+            if (cb){
+              cb(err);
+            }
+          }
+          else{
+            console.log('tweeted');
+            if (cb){
+              cb(null);
+            }
+          }
+        });
+      }
+    });
+  },  
+
   update_profile_image: function(image_base64, cb) {
     console.log('updating profile image...');
     T.post('account/update_profile_image', {

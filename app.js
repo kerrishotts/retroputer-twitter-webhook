@@ -10,6 +10,22 @@ if (!endpoint) {
   console.error("No endpoint for Retroputer");
 }
 
+async function sendToRetroputer(asm) {
+  const r = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "image/png"
+    },
+    body: JSON.stringify({
+      asm,
+      finishScreen: "yes"
+    })
+  });
+  const buffer = await r.arraybuffer();
+  return buffer;
+}
+
 /*
   See code samples inside the examples folder. Happy tweeting!
 */
@@ -23,14 +39,18 @@ twitterbot.on('direct_message_events', function(dm){
     });
 });
 
-twitterbot.on('tweet_create_events', function(tweet){
-  /*
-    See what a tweet object looks like:
-    https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/intro-to-tweet-json
+twitterbot.on('tweet_create_events', async function(tweet){
+  
+  const incomingTweet = tweet.text.replace(/@retroputer/g, "");
+  
+  const buffer = await sendToRetroputer(incomingTweet);
 
-    Documentation for POST statuses/update:
-    https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update.html
-  */
+  twitterbot.post_image_in_reply_to(tweet.id_str, "Results", require("btoa")(buffer), (d) => {
+    console.log("Posted?", d)
+  });
+
+/*  
+  
   
   var text;  
 
@@ -54,5 +74,6 @@ twitterbot.on('tweet_create_events', function(tweet){
       console.log('Error', err);
     }
   });  
+  */
 });
 const dashboard = require('./dashboard')(twitterbot);
