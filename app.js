@@ -10,7 +10,7 @@ const twitterbot = require('./twitterbot');
 */
 
 twitterbot.on('direct_message_events', function(dm){
-    twitterbot.send_dm(dm.sender_id, 'Hello!', function(err){
+    twitterbot.send_dm(dm.sender_id, 'Hello There!', function(err){
       if (err){
         console.log(err);
       }
