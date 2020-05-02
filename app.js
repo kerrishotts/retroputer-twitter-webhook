@@ -27,6 +27,7 @@ async function sendToRetroputer(asm) {
     },
     body: JSON.stringify({
       asm,
+      timeout: 6000,
       finishScreen: "yes"
     })
   });
