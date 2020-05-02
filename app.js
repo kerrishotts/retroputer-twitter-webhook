@@ -50,7 +50,7 @@ twitterbot.on('direct_message_events', function(dm){
 
 twitterbot.on('tweet_create_events', async function(tweet){
   
-  const incomingTweet = entities.decode(tweet.extended_tweet.full_text);
+  const incomingTweet = entities.decode((tweet.extended_tweet && tweet.extended_tweet.full_text) || tweet.text);
   if (incomingTweet.indexOf("@retroputer") > 0) return; // ignore tweets that aren't directly @ us, like people talking _about_ us
   
   const asm = incomingTweet.replace(/@retroputer/g, "").trim()
