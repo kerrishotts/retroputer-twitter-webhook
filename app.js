@@ -39,13 +39,45 @@ async function sendToRetroputer(asm) {
   See code samples inside the examples folder. Happy tweeting!
 */
 
-twitterbot.on('direct_message_events', function(dm){
-    console.log(dm.sender_id);
-    twitterbot.send_dm(dm.sender_id, 'Hello!', function(err){
+twitterbot.on('direct_message_events', async function(dm){
+  console.log(dm.sender_id);
+  
+  const incomingTweet = entities.decode(dm.message_data.text);
+  if (incomingTweet.indexOf("@retroputer") > 0) return; // ignore tweets that aren't directly @ us, like people talking _about_ us
+  
+  const asm = incomingTweet.replace(/@retroputer/g, "").trim()
+                           .replace(/https:\/\/t.co\/[A-Za-z0-9]*/g, "");
+  
+  const r = await sendToRetroputer(asm);
+  console.log(r.error, r.asm);
+  
+  if (r.error) {
+    twitterbot.send_dm(dm.sender_id, `Retroputer tried, but that didn't assemble correctly: ${r.error}`, function(err){
       if (err){
         console.log(err);
       }
     });
+    return;
+  }
+
+  console.log("Frame", typeof r.frame, r.frame.length, Array.isArray(r.frame));
+  
+  if (!r.frame) {
+    console.log("No frame to render");
+    return;
+  }
+  
+  const png = new PNG({ width: 640, height: 480 });
+  png.data = r.frame || [];
+  const buffer = PNG.sync.write(png);
+  
+  console.log("Buffer", buffer.length);
+  
+  twitterbot.send_dm_image(dm.sender_id, "Here you go:", btoa(buffer), function(err){
+    if (err){
+      console.log(err);
+    }
+  });
 });
 
 twitterbot.on('tweet_create_events', async function(tweet){

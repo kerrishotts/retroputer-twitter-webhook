@@ -70,6 +70,55 @@ module.exports = {
     
     });
   },
+  send_dm_image: function(user_id, text, image, cb) {
+   T.post('media/upload', { media_data: image }, function (err, data, response) {
+     console.log(data);
+      if (err){
+        console.log('ERROR:\n', err);      
+        if (cb){
+          cb(err);
+        }
+      }
+     
+      else{
+        console.log('Replying to DM with image...');
+        T.post('direct_messages/indicate_typing', {
+          'recipient_id': user_id
+        }, function(err, data, response) {
+          if (err){
+            console.log('ERROR:\n', err);
+          }
+          T.post('direct_messages/events/new', {
+            'event': {
+              'type': 'message_create',
+              'message_create': {
+                'target': {
+                  'recipient_id': user_id
+                },
+                'message_data': {
+                  'text': text,
+                  'attachment': {
+                    'type': 'media',
+                    'media': {
+                      'id': data.media_id_string
+                    }
+                  }
+                }
+              }
+            }
+          }, function(err, data, response) {
+            if (err){
+              console.log('ERROR:\n', err);
+            }
+            if (cb){
+              cb(err, data, response);
+            }
+          });
+
+        });
+      };
+    });  
+  },
   post_image: function(text, image_base64, cb) {
    T.post('media/upload', { media_data: image_base64 }, function (err, data, response) {
       if (err){
