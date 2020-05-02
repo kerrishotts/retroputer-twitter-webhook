@@ -27,7 +27,9 @@
     "request-promise": "^4.2.2",
     "socket.io": "2.0.4",
     "uuid": "^3.2.1",
-    "twit": "^2.2.9"
+    "twit": "^2.2.9",
+    "btoa": "^1.2.1",
+    "cross-fetch": "^3.0.3"
   },
   "repository": {
     "type": "git",
