@@ -72,15 +72,15 @@ module.exports = {
   },
   send_dm_image: function(user_id, text, image, cb) {
    T.post('media/upload', { media_data: image }, function (err, data, response) {
-     console.log(data);
+      const media = data;
+      console.log(media);
+     
       if (err){
         console.log('ERROR:\n', err);      
         if (cb){
           cb(err);
         }
-      }
-     
-      else{
+      } else {
         console.log('Replying to DM with image...');
         T.post('direct_messages/indicate_typing', {
           'recipient_id': user_id
@@ -100,7 +100,7 @@ module.exports = {
                   'attachment': {
                     'type': 'media',
                     'media': {
-                      'id': data.media_id_string
+                      'id': media.media_id_string
                     }
                   }
                 }
