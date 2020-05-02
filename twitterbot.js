@@ -105,10 +105,10 @@ module.exports = {
   post_image_in_reply_to: function(tweet_id, text, image, cb) {
    T.post('media/upload', { media_data: image }, function (err, data, response) {
       if (err){
-        console.log('ERROR:\n', err);
-      }
-      if (cb){
-        cb(err);
+        console.log('ERROR:\n', err);      
+        if (cb){
+          cb(err);
+        }
       }
      
       else{
@@ -116,6 +116,7 @@ module.exports = {
         T.post('statuses/update', {
           status: text,
           in_reply_to_status_id: tweet_id,
+          auto_populate_reply_metadata: true,
           media_ids: new Array(data.media_id_string)
         },
         function(err, data, response) {

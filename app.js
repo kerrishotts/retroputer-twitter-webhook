@@ -79,10 +79,10 @@ twitterbot.on('tweet_create_events', async function(tweet){
   png.data = r.frame || [];
   const buffer = PNG.sync.write(png);
   
-  twitterbot.post_image_in_reply_to(tweet.id_str, "Results", btoa(buffer), (d) => {
-    if (d && d.statusCode === 400) {
-      console.log("Failed to post", d.message)    
-    }
+  console.log("Buffer", buffer.length);
+  
+  twitterbot.post_image_in_reply_to(tweet.id_str, asm, btoa(buffer), (d) => {
+    console.log("sent post", d);
   });
 
 /*  
